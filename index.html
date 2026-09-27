@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Abubakar Imran — BS Computer Science student portfolio. Software development, Python, Data Science and AI.">
+<title>Abubakar Imran | Computer Science Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c10;--panel:#10141b;--panel2:#151a22;--text:#f4f7fb;--muted:#9aa5b4;--line:#242b36;--accent:#63e6be;--accent2:#7aa7ff;--max:1120px}
+:root:not([data-theme="light"]){color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.65;min-height:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit;text-decoration:none}
+.container{width:min(var(--max),calc(100% - 40px));margin:auto}
+.page{display:none; animation: fadeIn 0.4s ease-out;} /* UI Enhancement: Added fade in for page transitions */
+.page.active{display:block}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.site-header{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100vw - var(--max))/2));position:sticky;top:env(safe-area-inset-top,0px);background:rgba(10,12,16,.88);backdrop-filter:blur(16px);z-index:10}
+.logo{font-family:"Space Grotesk";font-weight:700;font-size:19px;display:flex;align-items:center;gap:9px;cursor:pointer; transition: opacity 0.2s}
+.logo:hover {opacity: 0.8}
+.logo span{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--accent);color:var(--accent);border-radius:9px; overflow:hidden;}
+.logo span img {width: 110%; height: 110%; object-fit: cover;}
+.nav{display:flex;gap:28px}
+.nav a{color:var(--muted);font-size:14px;cursor:pointer; position: relative; transition: color 0.2s;}
+.nav a:hover,.nav .active{color:var(--text)}
+/* UI Enhancement: Nav active indicator */
+.nav a.active::after { content: ''; position: absolute; bottom: -26px; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 2px; }
+.menu-toggle{display:none;background:none;border:0;color:var(--text);font-size:24px}
+
+.hero{min-height:650px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:60px;padding:80px 0}
+.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:var(--accent);margin-bottom:14px}
+.hero h1,.page-hero h1{font:700 clamp(42px,6vw,72px)/1.04 "Space Grotesk";letter-spacing:-2.5px;max-width:800px}
+.hero h1 span{color:var(--accent)}
+.lead{color:var(--muted);font-size:17px;max-width:720px;margin-top:24px}
+.hero-actions{display:flex;gap:12px;margin-top:30px; flex-wrap: wrap;}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 19px;border-radius:9px;border:1px solid var(--line);font-weight:700;font-size:14px;cursor:pointer; transition: all 0.2s ease;}
+.btn.primary{background:var(--accent);color:#07110e;border-color:var(--accent); box-shadow: 0 4px 14px rgba(99, 230, 190, 0.2);} /* UI Enhancement: Glow effect */
+.btn.primary:hover{box-shadow: 0 6px 20px rgba(99, 230, 190, 0.4); transform:translateY(-2px)}
+.btn.secondary{background:transparent}
+.btn.secondary:hover{background: var(--panel2); border-color: var(--muted); transform:translateY(-2px)}
+.quick-links{display:flex;gap:22px;margin-top:25px;color:var(--muted);font-size:13px}
+.quick-links a{transition: color 0.2s;}
+.quick-links a:hover,.text-link:hover{color:var(--accent)}
+
+.hero-card{border:1px solid var(--line);background:linear-gradient(145deg,var(--panel2),var(--panel));border-radius:18px;box-shadow:0 30px 80px #0008;overflow:hidden; transition: transform 0.3s;}
+.hero-card:hover { transform: translateY(-5px); } /* UI Enhancement: Subtle float */
+.terminal-top{height:42px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 15px;color:#687384;font-size:11px}
+.terminal-top i{width:8px;height:8px;border-radius:50%;background:#3b4350}
+.terminal-top span{margin-left:8px}
+.hero-card pre{padding:28px;overflow:auto;color:#dbe4ef;font:500 14px/2 "SFMono-Regular",Consolas,monospace}
+.hero-card code b{color:var(--accent2)}
+.hero-card code em{color:var(--accent);font-style:normal}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:26px 15px;border-right:1px solid var(--line); transition: background 0.2s;}
+.stats div:hover { background: var(--panel); } /* UI Enhancement */
+.stats div:last-child{border:0}
+.stats strong{display:block;font:700 25px "Space Grotesk"}
+.stats span{color:var(--muted);font-size:12px}
+
+.section{padding:95px 0}
+.section-heading{margin-bottom:32px}
+.section-heading h2,.two-col h2,.skill-card h2,.project-large h2,.github-banner h2,.contact-box h2{font:700 32px/1.2 "Space Grotesk";letter-spacing:-.8px}
+.split{display:flex;justify-content:space-between;align-items:end}
+.text-link{color:var(--muted);font-size:13px;cursor:pointer; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s;}
+.feature-grid,.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature,.project-card,.skill-card,.info-card,.contact-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
+.feature .icon{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:#1a2329;color:var(--accent);font-size:21px;margin-bottom:24px}
+.feature h3{font:700 19px "Space Grotesk";margin-bottom:9px}
+.feature p,.project-card p,.skill-card p,.info-card p,.contact-box p{color:var(--muted);font-size:14px}
+
+.project-card{transition:all .3s ease;cursor:pointer;display:block; position: relative; overflow: hidden;}
+.project-card:hover{border-color:#4a5a6e;transform:translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);} /* UI Enhancement: Enhanced hover */
+.project-card h3{font:700 20px "Space Grotesk";margin:12px 0 9px}
+.tag{display:inline-block;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.page-hero{padding:100px 0 65px;border-bottom:1px solid var(--line)}
+.page-hero h1{font-size:clamp(42px,5vw,62px)}
+.two-col{display:grid;grid-template-columns:1.5fr .8fr;gap:70px}
+.two-col p{color:var(--muted);margin:16px 0;font-size:15px}
+.info-card{height:max-content}
+.info-card h3{font:700 18px "Space Grotesk";margin-top:10px}
+.line{height:1px;background:var(--line);margin:18px 0}
+.timeline{border-left:1px solid var(--line);margin-left:8px}
+.timeline>div{position:relative;padding:0 0 35px 35px}
+.timeline>div:before{content:"";position:absolute;left:-5px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--accent); transition: transform 0.2s;}
+.timeline>div:hover:before { transform: scale(1.5); } /* UI Enhancement */
+.timeline span{font-size:11px;color:var(--accent);font-weight:800}
+.timeline h3{font:700 20px "Space Grotesk";margin-top:3px}
+.timeline p{color:var(--muted);font-size:14px}
+
+.skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.skill-card{min-height:210px; transition: border-color 0.3s;}
+.skill-card:hover { border-color: var(--muted); }
+.skill-head{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+.skill-head span,.project-number{color:var(--accent);font:700 12px monospace}
+.skill-head h2{font-size:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chips b{font-size:11px;font-weight:600;border:1px solid var(--line);background:#151a21;padding:5px 9px;border-radius:7px;color:#d5dce6; transition: background 0.2s;}
+.chips b:hover { background: var(--line); color: #fff; }
+.project-list{padding-top:65px}
+.project-large{display:grid;grid-template-columns:80px 1fr;gap:25px;padding:45px 0;border-bottom:1px solid var(--line); transition: background 0.3s; border-radius: 12px; margin-bottom: 10px;}
+.project-large:hover { background: var(--panel); padding-left: 20px; padding-right: 20px; border-bottom-color: transparent;} /* UI Enhancement: Row hover effect */
+.project-large:first-child{padding-top:20px}
+.project-large h2{margin:10px 0}
+.project-large p,.project-large li{color:var(--muted);font-size:14px}
+.project-large ul{margin:18px 0 0 18px}
+
+.github-banner{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;margin-bottom:80px}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px}
+.contact-item{display:flex;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line); transition: transform 0.2s;}
+.contact-item:hover { transform: translateX(10px); } /* UI Enhancement: slide right on hover */
+.contact-item>span{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:10px;color:var(--accent);font-weight:800; transition: all 0.2s;}
+.contact-item:hover>span { background: var(--accent); color: var(--bg); }
+.contact-item small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.5px}
+.contact-item strong{display:block;font-size:14px;margin-top:2px}
+.contact-box{align-self:start}
+footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:12px; margin-top: 40px;}
+.footer-inner{display:flex;justify-content:space-between}
+.footer-inner div{display:flex;gap:18px}
+.footer-inner a{transition: color 0.2s;}
+.footer-inner a:hover{color:var(--text)}
+
+.hr-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 999; font-family: Inter, sans-serif; }
+.hr-trigger-btn { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #000; border: none; padding: 12px 20px; border-radius: 30px; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(99, 230, 190, 0.4); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.hr-trigger-btn:hover { transform: scale(1.05) translateY(-3px); }
+.hr-trigger-btn svg { width: 16px; height: 16px; }
+
+.hr-panel { position: absolute; bottom: 65px; right: 0; width: 320px; background: var(--panel2); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.3s ease; }
+.hr-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.hr-panel-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.hr-panel h4 { font-family: 'Space Grotesk'; font-size: 16px; color: var(--text); }
+.hr-panel p.subtitle { color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+.hr-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px; transition: color 0.2s; }
+.hr-close:hover { color: var(--text); }
+
+.hr-data-group { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.hr-data-group strong { color: var(--text); display: block; margin-bottom: 4px; font-weight: 600; }
+.hr-data-group ul { margin-left: 18px; color: #d5dce6; }
+.hr-data-group li { margin-bottom: 3px; }
+.status-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(99, 230, 190, 0.1); color: var(--accent); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; border: 1px solid rgba(99, 230, 190, 0.2); }
+.status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+.hr-dl-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--text); color: var(--bg); padding: 10px; border-radius: 8px; font-weight: 700; font-size: 13px; text-decoration: none; margin-top: 20px; transition: opacity 0.2s; border: none; width: 100%; cursor: pointer;}
+.hr-dl-btn:hover { opacity: 0.9; }
+
+@keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(99, 230, 190, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(99, 230, 190, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(99, 230, 190, 0); } }
+
+@media(max-width:800px){
+.nav{display:none;position:absolute;top:76px;left:0;right:0;background:var(--bg);padding:20px;flex-direction:column;gap:15px;border-bottom:1px solid var(--line)}
+.nav.open{display:flex}
+.nav a.active::after { display: none; }
+.menu-toggle{display:block}
+.hero{grid-template-columns:1fr;padding:65px 0}
+.hero-card{display:none}
+.stats{grid-template-columns:repeat(2,1fr)}
+.stats div:nth-child(2){border-right:0}
+.feature-grid,.project-grid,.skill-grid,.two-col,.contact-grid{grid-template-columns:1fr}
+.section{padding:70px 0}
+.split,.github-banner{align-items:flex-start;flex-direction:column;gap:20px}
+.project-large{grid-template-columns:45px 1fr}
+.project-large:hover { padding-left: 0; padding-right: 0; background: transparent; border-bottom-color: var(--line);}
+.page-hero{padding:70px 0 45px}
+.footer-inner{flex-direction:column;gap:12px}
+.hr-widget-container { bottom: 15px; right: 15px; }
+}
+@media(max-width:480px){
+.container{width:min(var(--max),calc(100% - 28px))}
+.hero h1{font-size:43px}
+.stats strong{font-size:21px}
+.hr-panel { width: calc(100vw - 30px); right: 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" data-page="home">
+    <span>
+      <img src="https://avatars.githubusercontent.com/u/203070362?v=4" alt="Abubakar Profile" loading="lazy">
+    </span> Abubakar
+  </a>
+  <button class="menu-toggle" aria-label="Open menu">☰</button>
+  <nav class="nav">
+    <a class="active" data-page="home">Home</a>
+    <a data-page="about">About</a>
+    <a data-page="skills">Skills</a>
+    <a data-page="projects">Projects</a>
+    <a data-page="contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page active" id="page-home">
+<section class="hero container">
+  <div class="hero-copy">
+    <p class="eyebrow">BS COMPUTER SCIENCE • LAHORE, PAKISTAN</p>
+    <h1>Building practical solutions with <span>code, data & AI.</span></h1>
+    <p class="lead">I'm Abubakar Imran, a Computer Science student with hands-on experience in C++, PHP, MySQL and Python, and a growing focus on Data Science, Machine Learning and AI.</p>
+    <div class="hero-actions">
+      <a class="btn primary" data-page="projects">View My Projects</a>
+      <!-- UI Enhancement: Added Download CV Button to Hero -->
+      <a class="btn secondary" href="#" onclick="alert('In production, this downloads Abubakar_CV_Updated.pdf')">Download CV ↓</a>
+    </div>
+    <div class="quick-links">
+      <a href="https://github.com/Abubakar2025" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://linkedin.com/in/abubakar-imran-454770347" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="terminal-top"><i></i><i></i><i></i><span>about_me.py</span></div>
+    <pre><code><b>class</b> Abubakar:
+    role = <em>"CS Student"</em>
+    focus = [
+      <em>"Python"</em>,
+      <em>"Data Science"</em>,
+      <em>"AI / ML"</em>
+    ]
+    semester = <em>4</em>
+    cgpa = <em>3.4</em></code></pre>
+  </div>
+</section>
+
+<section class="stats container">
+  <div><strong>4th</strong><span>Semester Completed</span></div>
+  <div><strong>3.4</strong><span>Current CGPA</span></div>
+  <div><strong>Python</strong><span>Growing Focus</span></div>
+  <div><strong>AI / ML</strong><span>Area of Interest</span></div>
+</section>
+
+<section class="section container">
+  <div class="section-heading"><p class="eyebrow">WHAT I DO</p><h2>From fundamentals to practical projects.</h2></div>
+  <div class="feature-grid">
+    <article class="feature"><span class="icon">⌘</span><h3>Software Development</h3><p>Build practical applications using C++, PHP, MySQL and web technologies with a focus on clean logic and useful functionality.</p></article>
+    <article class="feature"><span class="icon">⌁</span><h3>Data & Python</h3><p>Developing skills in Python, Pandas, NumPy and data preprocessing for real-world datasets and analytical workflows.</p></article>
+    <article class="feature"><span class="icon">◈</span><h3>AI & Computer Vision</h3><p>Exploring Machine Learning, AI and computer vision through projects involving prediction, face detection and data-driven systems.</p></article>
+  </div>
+</section>
+
+<section class="section container">
+  <div class="section-heading split"><div><p class="eyebrow">SELECTED WORK</p><h2>Projects I've built.</h2></div><a class="text-link" data-page="projects">View all projects →</a></div>
+  <div class="project-grid">
+    <a class="project-card" data-page="projects" data-anchor="qscents"><span class="tag">PHP • MySQL</span><h3>QSCENTS E-Commerce Management System</h3><p>Web-based e-commerce system with product management, search, cart, checkout and order functionality.</p></a>
+    <a class="project-card" data-page="projects" data-anchor="fake-account"><span class="tag">Python • ML</span><h3>Instagram Fake Account Detection</h3><p>Machine-learning project focused on identifying potentially fake Instagram accounts from profile and activity features.</p></a>
+    <a class="project-card" data-page="projects" data-anchor="bank"><span class="tag">C++ • OOP • DSA</span><h3>Bank Management System</h3><p>Console-based banking system with accounts, transactions, loans, data structures and file storage.</p></a>
+  </div>
+</section>
+</section>
+
+<section class="page" id="page-about">
+<section class="page-hero container"><p class="eyebrow">ABOUT ME</p><h1>A CS student with a practical mindset.</h1><p class="lead">I enjoy turning programming concepts into useful projects and continuously expanding my skills toward Python, Data Science, Machine Learning and AI.</p></section>
+<section class="section container two-col">
+  <div>
+    <h2>My journey</h2>
+    <p>I am pursuing a BS in Computer Science at Superior University. My foundation includes Object-Oriented Programming, Data Structures & Algorithms, Database Management Systems and Web Development.</p>
+    <p>I have worked on projects ranging from C++ banking systems and Arduino automation to PHP/MySQL web applications and Python-based AI/ML projects. I'm currently especially interested in Python, Data Science and AI-related fields.</p>
+    <p>I prefer learning by building: understanding a concept, applying it to a project, testing it, and improving it.</p>
+  </div>
+  <aside class="info-card">
+    <p class="eyebrow">CURRENT STATUS</p>
+    <h3>BS Computer Science</h3><p>Superior University<br>2024 – Present</p>
+    <div class="line"></div>
+    <h3>4th Semester</h3><p>Completed</p>
+    <div class="line"></div>
+    <h3>CGPA</h3><p>3.4</p>
+  </aside>
+</section>
+<section class="section container">
+  <div class="section-heading"><p class="eyebrow">EDUCATION</p><h2>Academic background.</h2></div>
+  <div class="timeline">
+    <div><span>2024 – Present</span><h3>BS Computer Science</h3><p>Superior University</p></div>
+    <div><span>2024</span><h3>Intermediate (ICS)</h3><p>Punjab Group of Colleges</p></div>
+    <div><span>2022</span><h3>Matriculation — Computer Science</h3><p>Govt. Islamia High School</p></div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="page-skills">
+<section class="page-hero container"><p class="eyebrow">TECHNICAL SKILLS</p><h1>Tools, technologies & foundations.</h1><p class="lead">A growing technical toolkit built through coursework, projects and hands-on experimentation.</p></section>
+<section class="section container skill-grid">
+  <article class="skill-card"><div class="skill-head"><span>01</span><h2>Programming</h2></div><div class="chips"><b>Python</b><b>C++</b><b>C</b><b>PHP</b></div><p>Strong academic foundation with practical project experience in C++ and growing focus on Python.</p></article>
+  <article class="skill-card"><div class="skill-head"><span>02</span><h2>Data Science & AI</h2></div><div class="chips"><b>Pandas</b><b>NumPy</b><b>Scikit-learn</b><b>Data Preprocessing</b><b>Machine Learning</b><b>OpenCV</b><b>Computer Vision</b></div><p>Developing hands-on capability in data preparation, machine learning workflows and computer vision.</p></article>
+  <article class="skill-card"><div class="skill-head"><span>03</span><h2>Web & Database</h2></div><div class="chips"><b>HTML</b><b>CSS</b><b>PHP</b><b>Flask</b><b>MySQL</b><b>SQL</b><b>CRUD</b></div><p>Experience building dynamic web applications and connecting them to relational databases.</p></article>
+  <article class="skill-card"><div class="skill-head"><span>04</span><h2>Core CS</h2></div><div class="chips"><b>OOP</b><b>DSA</b><b>DBMS</b><b>Computer Networks</b><b>Mobile App Development</b><b>Computer Vision</b></div><p>Academic foundations supporting problem solving, software design and system understanding.</p></article>
+  <article class="skill-card"><div class="skill-head"><span>05</span><h2>Tools</h2></div><div class="chips"><b>Git/GitHub</b><b>VS Code</b><b>Jupyter Notebook</b><b>XAMPP</b><b>SQL Server</b><b>Dev C++</b><b>Spyder</b></div><p>Tools used across coursework and personal projects.</p></article>
+</section>
+</section>
+
+<section class="page" id="page-projects">
+<section class="page-hero container"><p class="eyebrow">MY WORK</p><h1>Projects built while learning.</h1><p class="lead">A selection of academic and practical projects across software development, databases, data science and AI.</p></section>
+<section class="section container project-list">
+  <article id="qscents" class="project-large"><div class="project-number">01</div><div><span class="tag">PHP • MySQL • XAMPP</span><h2>QSCENTS E-Commerce Management System</h2><p>Developed a web-based e-commerce management system focused on product and order operations.</p><ul><li>Product categories, search and sorting</li><li>Shopping cart and checkout functionality</li><li>Order-management workflow</li><li>PHP/MySQL backend and database operations</li></ul></div></article>
+  <article id="fake-account" class="project-large"><div class="project-number">02</div><div><span class="tag">Python • Machine Learning • Flask</span><h2>Instagram Fake Account Detection</h2><p>Developed a machine-learning system for identifying potentially fake Instagram accounts using profile and activity-related features.</p><ul><li>Data analysis and feature engineering on account data</li><li>Model training and evaluation with Scikit-learn</li><li>Flask web app for real-time predictions</li></ul></div></article>
+  <article id="bank" class="project-large"><div class="project-number">03</div><div><span class="tag">C++ • OOP • DSA</span><h2>Bank Management System</h2><p>Console-based banking application implementing OOP principles and data structures.</p><ul><li>Account creation, balance and transactions</li><li>Loan handling and return process</li><li>Linked Lists, Stack and Queue</li><li>File handling for persistent storage</li><li>Password/PIN-based security features</li></ul></div></article>
+  <article class="project-large"><div class="project-number">04</div><div><span class="tag">Python • OpenCV • AI</span><h2>Face Detection Attendance System</h2><p>Computer-vision based attendance concept using OpenCV for face detection and automated attendance marking.</p></div></article>
+  <article class="project-large"><div class="project-number">05</div><div><span class="tag">PHP • MySQL</span><h2>Online Submission Form System</h2><p>Dynamic web application with CRUD operations, form validation and MySQL database integration, developed using XAMPP.</p></div></article>
+  <article class="project-large"><div class="project-number">06</div><div><span class="tag">C • Arduino</span><h2>Mini Electric Lift System</h2><p>Hardware-based automation project controlling lift movement through switches and indicators with real-time state management.</p></div></article>
+</section>
+<section class="section container github-banner"><div><p class="eyebrow">MORE ON GITHUB</p><h2>See the code and project repositories.</h2></div><a class="btn primary" href="https://github.com/Abubakar2025" target="_blank" rel="noopener">Open GitHub ↗</a></section>
+</section>
+
+<section class="page" id="page-contact">
+<section class="page-hero container"><p class="eyebrow">GET IN TOUCH</p><h1>Let's connect.</h1><p class="lead">Interested in internships, collaboration, software projects, Python, Data Science or AI? Feel free to reach out.</p></section>
+<section class="section container contact-grid">
+  <div>
+    <a class="contact-item" href="mailto:mabubakarimran800@gmail.com"><span>✉</span><div><small>EMAIL</small><strong>mabubakarimran800@gmail.com</strong></div></a>
+    <a class="contact-item" href="https://linkedin.com/in/abubakar-imran-454770347" target="_blank" rel="noopener"><span>in</span><div><small>LINKEDIN</small><strong>Abubakar Imran</strong></div></a>
+    <a class="contact-item" href="https://github.com/Abubakar2025" target="_blank" rel="noopener"><span>⌘</span><div><small>GITHUB</small><strong>github.com/Abubakar2025</strong></div></a>
+    <div class="contact-item"><span>⌖</span><div><small>LOCATION</small><strong>Lahore, Pakistan</strong></div></div>
+  </div>
+  <div class="contact-box">
+    <h2>Quick message</h2>
+    <p>This button opens your email app with a pre-filled subject.</p>
+    <a class="btn primary" href="mailto:mabubakarimran800@gmail.com?subject=Portfolio%20Contact">Send Email ↗</a>
+  </div>
+</section>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Abubakar Imran</p>
+    <div>
+      <a href="mailto:mabubakarimran800@gmail.com">Email</a>
+      <a href="https://github.com/Abubakar2025" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/abubakar-imran-454770347" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<div class="hr-widget-container">
+  <button class="hr-trigger-btn" id="hrBtn" aria-label="Open HR Quick View">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+    <span class="btn-text">HR Quick View</span>
+  </button>
+
+  <div class="hr-panel" id="hrPanel">
+    <div class="hr-panel-header">
+      <div>
+        <h4>ATS Summary Card</h4>
+        <p class="subtitle">Optimized for Recruiters</p>
+      </div>
+      <button class="hr-close" id="hrCloseBtn">×</button>
+    </div>
+    
+    <div class="hr-data-group">
+      <strong>Candidate:</strong>
+      Abubakar Imran (BSCS, Sem 4, 3.4 CGPA)
+    </div>
+    
+    <div class="hr-data-group">
+      <strong>Top Skills:</strong>
+      <ul>
+        <li>Python (Pandas, ML, Flask)</li>
+        <li>C++ (OOP, DSA)</li>
+        <li>Web (PHP, MySQL, HTML/CSS)</li>
+      </ul>
+    </div>
+    
+    <div class="hr-data-group">
+      <strong>Availability:</strong>
+      <span class="status-badge"><span class="status-dot"></span> Seeking Internships/Roles</span>
+    </div>
+
+    <button class="hr-dl-btn" onclick="alert('In a real environment, this triggers Abubakar_CV_Updated.pdf download')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      Download Full Resume
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Original Navigation Logic
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  if(toggle){ toggle.addEventListener('click', () => nav.classList.toggle('open')); }
+
+  function showPage(name, anchor){
+    document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+    const target = document.getElementById('page-' + name);
+    if(target) target.classList.add('active');
+    document.querySelectorAll('.nav a[data-page]').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === name);
+    });
+    nav.classList.remove('open');
+    if(anchor){
+      setTimeout(() => {
+        const el = document.getElementById(anchor);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      }, 60);
+    } else {
+      window.scrollTo({top:0, behavior:'instant'});
+    }
+  }
+
+  document.querySelectorAll('[data-page]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      showPage(el.dataset.page, el.dataset.anchor);
+    });
+  });
+
+  // HR Widget Logic (New Feature)
+  const hrBtn = document.getElementById('hrBtn');
+  const hrPanel = document.getElementById('hrPanel');
+  const hrCloseBtn = document.getElementById('hrCloseBtn');
+
+  function toggleHrPanel(e) {
+    if(e) e.stopPropagation();
+    hrPanel.classList.toggle('open');
+  }
+
+  if(hrBtn && hrPanel && hrCloseBtn) {
+    hrBtn.addEventListener('click', toggleHrPanel);
+    hrCloseBtn.addEventListener('click', toggleHrPanel);
+    
+    // Close panel when clicking outside
+    document.addEventListener('click', (e) => {
+      if(hrPanel.classList.contains('open') && !hrPanel.contains(e.target) && !hrBtn.contains(e.target)) {
+        hrPanel.classList.remove('open');
+      }
+    });
+    
+    // Prevent clicks inside panel from closing it
+    hrPanel.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+})();
+</script>
+</body>
+</html>
